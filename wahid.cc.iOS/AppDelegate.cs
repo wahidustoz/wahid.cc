@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Lottie.Forms.iOS.Renderers;
 using UIKit;
+using Xamarin.Forms;
 
 namespace wahid.cc.iOS
 {
@@ -22,7 +24,10 @@ namespace wahid.cc.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            Forms.SetFlags("CollectionView_Experimental");
+
             global::Xamarin.Forms.Forms.Init();
+            AnimationViewRenderer.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

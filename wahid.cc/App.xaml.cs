@@ -1,4 +1,5 @@
 ﻿using System;
+using wahid.cc.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,8 +10,12 @@ namespace wahid.cc
         public App()
         {
             InitializeComponent();
+            Device.SetFlags(new[] {
+                "CarouselView_Experimental",
+                "IndicatorView_Experimental"
+            });
 
-            MainPage = new MainPage();
+            MainPage = new AnimatedStoryboard();
         }
 
         protected override void OnStart()

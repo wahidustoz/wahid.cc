@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="wahid.cc.Views.AnimatedStoryboard"
+             xmlns:viewmodels="clr-namespace:wahid.cc.ViewModels"
+             x:Name="AnimatedStoryboardPage"
+             xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms">
+
+    <ContentPage.BindingContext>
+        <viewmodels:AnimatedStoryboardViewModel/>
+    </ContentPage.BindingContext>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        
+        <CollectionView HorizontalScrollBarVisibility="Never"
+                        VerticalScrollBarVisibility="Never"
+                        ItemsUpdatingScrollMode="KeepScrollOffset"
+                        SelectionMode="None"
+                        ItemsSource="{Binding Storyboards}"
+                        Grid.Row="0"
+                        Scrolled="CollectionScrolled">
+            <CollectionView.ItemsLayout>
+
+                <GridItemsLayout SnapPointsAlignment="Center"
+                                 SnapPointsType="Mandatory"
+                                 Orientation="Horizontal"/>
+
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <Grid BackgroundColor="{Binding Background}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{Binding Source={x:Reference AnimatedStoryboardPage}, Path=Width}"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Text="{Binding Title}"
+                               FontSize="Title"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               VerticalOptions="EndAndExpand"
+                               Grid.Row="0"/>
+                        <lottie:AnimationView Animation="pay-online.json"
+                                              Loop="True"
+                                              AutoPlay="True"
+                                              Grid.Row="1"/>
+
+                        <Label Text="{Binding Description}"
+                               LineBreakMode="WordWrap"
+                               FontSize="Large"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               HorizontalTextAlignment="Center"
+                               VerticalOptions="StartAndExpand"
+                               Grid.Row="2"/>
+                    </Grid>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+                              
+    </Grid>
+</ContentPage>
