@@ -10,12 +10,22 @@ namespace wahid.cc
         public App()
         {
             InitializeComponent();
-            Device.SetFlags(new[] {
-                "CarouselView_Experimental",
-                "IndicatorView_Experimental"
-            });
 
-            MainPage = new AnimatedStoryboard();
+            XF.Material.Forms.Material.Init(this);
+
+            if (!Application.Current.Properties.ContainsKey("skip"))
+            {
+                Console.WriteLine("Not Contains");
+                MainPage = new NavigationPage(new AnimatedStoryboard());
+            }
+            else
+            {
+                Console.WriteLine("Contains");
+                if ((bool)Application.Current.Properties["skip"] == true)
+                    MainPage = new ContentPage();
+                else
+                    MainPage = new NavigationPage(new AnimatedStoryboard());
+            }
         }
 
         protected override void OnStart()

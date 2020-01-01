@@ -1,5 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="wahid.cc.App">
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+            x:Class="wahid.cc.App">
     <Application.Resources>
+
+        <OnPlatform x:Key="ComfortaaRegular" x:TypeArguments="x:String">
+            <On Platform="Android" Value="Comfortaa-Regular.ttf#Comfortaa Regular" />
+            <On Platform="iOS" Value="Comfortaa-Regular" />
+        </OnPlatform>
+
+        <OnPlatform x:Key="ComfortaaBold" x:TypeArguments="x:String">
+            <On Platform="Android" Value="Comfortaa-Bold.ttf#Comfortaa Bold" />
+            <On Platform="iOS" Value="Comfortaa-Bold" />
+        </OnPlatform>
+
+        <OnPlatform x:Key="ComfortaaMedium" x:TypeArguments="x:String">
+            <On Platform="Android" Value="Comfortaa-Medium.ttf#Comfortaa Medium" />
+            <On Platform="iOS" Value="Comfortaa-Medium" />
+        </OnPlatform>
+
+
+        <Style x:Key="Header" TargetType="Label">
+            <Setter Property="FontFamily" Value="{x:StaticResource ComfortaaBold}" />
+            <Setter Property="FontSize" Value="40" />
+            <Setter Property="TextColor" Value="White" />
+        </Style>
+
+        <Style x:Key="Body" TargetType="Label">
+            <Setter Property="FontFamily" Value="{x:StaticResource ComfortaaRegular}" />
+            <Setter Property="FontSize" Value="Body" />
+            <Setter Property="TextColor" Value="White" />
+        </Style>
     </Application.Resources>
 </Application>

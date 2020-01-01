@@ -16,19 +16,31 @@ namespace wahid.cc.ViewModels
             {
                 new Storyboard()
                 {
-                    Title="Custrom Entry",
-                    Description = "You can customize the entry control in both paltforms to fit your needs. Simply change the attached bindable properties!",
-                    Background = System.Drawing.Color.Azure
+                    Title="Analytics".ToLower(),
+                    Description = "Keep track of every cent you earn/spend. Jolt down how much money people owe you!".ToLower(),
+                    Animation = "analytics.json",
+                    To = "#233A4D",
+                    From = "#3B2845"
+
                 },
                 new Storyboard()
                 {
-                    Title="Custom Converters",
-                    Description = "You can use simple to use custom converters. Simple change the attached bindable properties!",
-                    Background = System.Drawing.Color.BlanchedAlmond
+                    Title="Income Calculator".ToLower(),
+                    Description = "Calculate and predict your income beforehand. Organize your income sources and track them easily.".ToLower(),
+                    Animation = "rise.json",
+                    From = "#2D232E",
+                    To="#C64191"
+                },
+                new Storyboard()
+                {
+                    Title="AI assistant".ToLower(),
+                    Description = "AI assisted data analizer will predict your expenditure learning from your pruchase behaviors.".ToLower(),
+                    Animation = "money.json",
+                    From = "#274060",
+                    To = "#4A306D"
                 }
             };
             #endregion
-
 
         }
 

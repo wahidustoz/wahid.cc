@@ -24,10 +24,10 @@ namespace wahid.cc.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            Forms.SetFlags("CollectionView_Experimental");
 
             global::Xamarin.Forms.Forms.Init();
             AnimationViewRenderer.Init();
+            XF.Material.iOS.Material.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);

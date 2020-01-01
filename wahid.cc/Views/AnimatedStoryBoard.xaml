@@ -4,72 +4,53 @@
              x:Class="wahid.cc.Views.AnimatedStoryboard"
              xmlns:viewmodels="clr-namespace:wahid.cc.ViewModels"
              x:Name="AnimatedStoryboardPage"
-             xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms">
+             xmlns:views="clr-namespace:wahid.cc.Views"
+             xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
+             xmlns:cardcontrols="clr-namespace:PanCardView.Controls;assembly=PanCardView"
+             xmlns:inputkit="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             NavigationPage.HasNavigationBar="False">
 
     <ContentPage.BindingContext>
         <viewmodels:AnimatedStoryboardViewModel/>
     </ContentPage.BindingContext>
 
     <Grid>
-
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-
-        
-        <CollectionView HorizontalScrollBarVisibility="Never"
-                        VerticalScrollBarVisibility="Never"
-                        ItemsUpdatingScrollMode="KeepScrollOffset"
-                        SelectionMode="None"
-                        ItemsSource="{Binding Storyboards}"
-                        Grid.Row="0"
-                        Scrolled="CollectionScrolled">
-            <CollectionView.ItemsLayout>
-
-                <GridItemsLayout SnapPointsAlignment="Center"
-                                 SnapPointsType="Mandatory"
-                                 Orientation="Horizontal"/>
-
-            </CollectionView.ItemsLayout>
-
-            <CollectionView.ItemTemplate>
+        <cards:CarouselView ItemsSource="{Binding Storyboards}"
+                    IsAutoNavigatingAnimationEnabled="False"
+                    x:Name="maincarousel">
+            <cards:CarouselView.ItemTemplate>
                 <DataTemplate>
-
-                    <Grid BackgroundColor="{Binding Background}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="{Binding Source={x:Reference AnimatedStoryboardPage}, Path=Width}"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Text="{Binding Title}"
-                               FontSize="Title"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center"
-                               VerticalOptions="EndAndExpand"
-                               Grid.Row="0"/>
-                        <lottie:AnimationView Animation="pay-online.json"
-                                              Loop="True"
-                                              AutoPlay="True"
-                                              Grid.Row="1"/>
-
-                        <Label Text="{Binding Description}"
-                               LineBreakMode="WordWrap"
-                               FontSize="Large"
-                               FontAttributes="Bold"
-                               HorizontalOptions="Center"
-                               HorizontalTextAlignment="Center"
-                               VerticalOptions="StartAndExpand"
-                               Grid.Row="2"/>
-                    </Grid>
-
+                    <views:StoryCard/>
                 </DataTemplate>
-            </CollectionView.ItemTemplate>
+            </cards:CarouselView.ItemTemplate>
+            <cardcontrols:IndicatorsControl BackgroundColor="Transparent"
+                                            Margin="0,0,0,40"/>
+        </cards:CarouselView>
 
-        </CollectionView>
-                              
+        <StackLayout Orientation="Horizontal"
+                     HorizontalOptions="Fill"
+                     VerticalOptions="End"
+                     Margin="40,20,40,60">
+            <inputkit:CheckBox Text="Don't show me anymore"
+                               Type="Material"
+                               Color="White"
+                               BoxBackgroundColor="White"
+                               TextColor="White"
+                               x:Name="dontremind"/>
+            <Label Text="Skip >"
+                   TextDecorations="Underline"
+                   TextColor="White"
+                   FontFamily="{StaticResource ComfortaaRegular}"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="Center"
+                   HorizontalTextAlignment="End">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
+                </Label.GestureRecognizers>
+            </Label>
+
+        </StackLayout>
     </Grid>
+
+
 </ContentPage>

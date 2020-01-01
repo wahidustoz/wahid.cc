@@ -9,6 +9,11 @@ namespace wahid.cc.Models
 
         public string Description { get; set; }
 
-        public Color Background { get; set; }
+        public string Animation { get; set; }
+
+        public string From { get; set; }
+
+        public string To { get; set; }
+
     }
 }
