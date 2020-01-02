@@ -10,3 +10,10 @@
 
 [![image](https://img.youtube.com/vi/mfGHbU1YCY8/0.jpg)](https://www.youtube.com/watch?v=mfGHbU1YCY8)
 
+-  [x] **Day/Nigt Mode**
+    * Dynamic Styles
+    * Style Inheritance
+    * Theme changes from any page
+
+[![image](https://img.youtube.com/vi/XtD4dVJCJeE/0.jpg)](https://youtu.be/XtD4dVJCJeE)
+
