@@ -7,7 +7,7 @@
              xmlns:views="clr-namespace:wahid.cc.Views"
              xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
              xmlns:cardcontrols="clr-namespace:PanCardView.Controls;assembly=PanCardView"
-             xmlns:inputkit="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             xmlns:inputkit="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit" xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              NavigationPage.HasNavigationBar="False">
 
     <ContentPage.BindingContext>
@@ -15,6 +15,7 @@
     </ContentPage.BindingContext>
 
     <Grid>
+
         <cards:CarouselView ItemsSource="{Binding Storyboards}"
                     IsAutoNavigatingAnimationEnabled="False"
                     x:Name="maincarousel">
@@ -24,8 +25,11 @@
                 </DataTemplate>
             </cards:CarouselView.ItemTemplate>
             <cardcontrols:IndicatorsControl BackgroundColor="Transparent"
-                                            Margin="0,0,0,40"/>
+                                            Margin="0,0,0,40"
+                                            IsEnabled="False"/>
         </cards:CarouselView>
+
+        
 
         <StackLayout Orientation="Horizontal"
                      HorizontalOptions="Fill"
@@ -33,16 +37,15 @@
                      Margin="40,20,40,60">
             <inputkit:CheckBox Text="Don't show me anymore"
                                Type="Material"
-                               Color="White"
-                               BoxBackgroundColor="White"
-                               TextColor="White"
+                               Color="{DynamicResource TertiaryTextColor}"
+                               BoxBackgroundColor="{DynamicResource TransparentColor}"
+                               TextColor="{DynamicResource TertiaryTextColor}"
+                               TextFontSize="18"
                                x:Name="dontremind"/>
             <Label Text="Skip >"
+                   Style="{DynamicResource tertiaryText}"
                    TextDecorations="Underline"
-                   TextColor="White"
-                   FontFamily="{StaticResource ComfortaaRegular}"
                    HorizontalOptions="FillAndExpand"
-                   VerticalOptions="Center"
                    HorizontalTextAlignment="End">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Tapped="OnTapGestureRecognizerTapped"/>
@@ -50,6 +53,38 @@
             </Label>
 
         </StackLayout>
+
+
+
+        <Frame HeightRequest="50"
+               WidthRequest="50"
+               CornerRadius="25"
+               Padding="0"
+               Margin="0,50,0,0"
+               HorizontalOptions="Center"
+               VerticalOptions="Start"
+               IsClippedToBounds="True"
+               HasShadow="True">
+
+            <Grid>
+                <lottie:AnimationView Animation="lightdark.json"
+                                      AutoPlay="False"
+                                      Speed="5"
+                                      x:Name="modeSwitcher"/>
+
+                <BoxView HeightRequest="50"
+                         WidthRequest="50"
+                         CornerRadius="25"
+                         BackgroundColor="Transparent">
+                    
+                    <BoxView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnModeChangerTapped"/>
+                    </BoxView.GestureRecognizers>
+                </BoxView>
+
+            </Grid>
+
+        </Frame>
     </Grid>
 
 

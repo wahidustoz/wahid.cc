@@ -1,0 +1,23 @@
+﻿<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="wahid.cc.Themes.DarkTheme">
+    <Color x:Key="BackgroundColorPrimary">#1f2041</Color>
+    <Color x:Key="BackgroundColorSecondary">#1A1649</Color>
+    <Color x:Key="PrimaryColor">#D1A448</Color>
+    <Color x:Key="SecondaryColor">#D1582C</Color>
+    <Color x:Key="PrimaryTextColor">#4893C6</Color>
+    <Color x:Key="SecondaryTextColor">#207BBA</Color>
+    <Color x:Key="TertiaryTextColor">#5B507E</Color>
+    <Color x:Key="TransparentColor">#163641</Color>
+
+    <!--#region Storyboard BackgroundColor-->
+    <x:String x:Key="Page1From">#090B08</x:String>
+    <x:String x:Key="Page1To">#011936</x:String>
+    <x:String x:Key="Page2From">#011936</x:String>
+    <x:String x:Key="Page2To">#261427</x:String>
+    <x:String x:Key="Page3From">#261427</x:String>
+    <x:String x:Key="Page3To">#0D0630</x:String>
+    <!--#endregion-->
+
+
+</ResourceDictionary>

@@ -158,6 +158,7 @@
     <BundleResource Include="Resources\money.json" />
     <BundleResource Include="Resources\analytics.json" />
     <BundleResource Include="Resources\rise.json" />
+    <BundleResource Include="Resources\lightdark.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Renderers\" />

@@ -19,10 +19,17 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Models\" />
     <Folder Include="Controls\" />
+    <Folder Include="Themes\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Views\StoryCard.xaml.cs">
       <DependentUpon>StoryCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ThemingTest.xaml.cs">
+      <DependentUpon>ThemingTest.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Themes\DarkTheme.xaml.cs">
+      <DependentUpon>DarkTheme.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

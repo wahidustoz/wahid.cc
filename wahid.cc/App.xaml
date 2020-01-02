@@ -7,6 +7,9 @@
             x:Class="wahid.cc.App">
     <Application.Resources>
 
+        <ResourceDictionary Source="Themes/DarkTheme.xaml"/>
+
+        <!--#region Comfortaa Custom Font-->
         <OnPlatform x:Key="ComfortaaRegular" x:TypeArguments="x:String">
             <On Platform="Android" Value="Comfortaa-Regular.ttf#Comfortaa Regular" />
             <On Platform="iOS" Value="Comfortaa-Regular" />
@@ -21,18 +24,29 @@
             <On Platform="Android" Value="Comfortaa-Medium.ttf#Comfortaa Medium" />
             <On Platform="iOS" Value="Comfortaa-Medium" />
         </OnPlatform>
+        <!--#endregion Comfortaa Custom Font-->
 
-
-        <Style x:Key="Header" TargetType="Label">
-            <Setter Property="FontFamily" Value="{x:StaticResource ComfortaaBold}" />
-            <Setter Property="FontSize" Value="40" />
-            <Setter Property="TextColor" Value="White" />
+        <Style TargetType="Label" x:Key="baseLabel">
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
         </Style>
 
-        <Style x:Key="Body" TargetType="Label">
-            <Setter Property="FontFamily" Value="{x:StaticResource ComfortaaRegular}" />
-            <Setter Property="FontSize" Value="Body" />
-            <Setter Property="TextColor" Value="White" />
+        <Style x:Key="primaryText" TargetType="Label" BasedOn="{StaticResource baseLabel}">
+            <Setter Property="FontFamily" Value="{StaticResource ComfortaaBold}"/>
+            <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}"/>
+            <Setter Property="FontSize" Value="50"/>
         </Style>
+        <Style x:Key="secondaryText" TargetType="Label" BasedOn="{StaticResource baseLabel}">
+            <Setter Property="FontFamily" Value="{StaticResource ComfortaaMedium}"/>
+            <Setter Property="TextColor" Value="{DynamicResource SecondaryTextColor}"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style x:Key="tertiaryText" TargetType="Label" BasedOn="{StaticResource baseLabel}">
+            <Setter Property="FontFamily" Value="{StaticResource ComfortaaRegular}"/>
+            <Setter Property="TextColor" Value="{DynamicResource TertiaryTextColor}"/>
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+
     </Application.Resources>
 </Application>

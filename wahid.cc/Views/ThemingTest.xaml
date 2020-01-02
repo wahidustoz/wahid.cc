@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="wahid.cc.Views.ThemingTest"
+             xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms">
+    <Grid BackgroundColor="#1F2041">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Frame HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand"
+               BackgroundColor="White"
+               Opacity="0"
+               Grid.RowSpan="3"/>
+
+        <Frame HeightRequest="50"
+               WidthRequest="50"
+               CornerRadius="25"
+               Padding="0"
+               Margin="0"
+               Grid.Row="1"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               IsClippedToBounds="True"
+               HasShadow="False">
+            <Frame.GestureRecognizers>
+                <!--<TapGestureRecognizer Tapped="OnModeChageTapped"/>-->
+            </Frame.GestureRecognizers>
+
+            <lottie:AnimationView Animation="lightdark.json"
+                                  AutoPlay="True"
+                                  Loop="True"/>
+        </Frame>
+
+    </Grid>
+
+</ContentPage>

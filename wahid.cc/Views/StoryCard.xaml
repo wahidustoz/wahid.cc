@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="wahid.cc.Views.StoryCard"
              xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
-             BackgroundColor="{Binding From}">
+             BackgroundColor="{DynamicResource BackgroundColorPrimary}">
 
-    <Grid >
+    <Grid Margin="40">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -13,13 +13,9 @@
         </Grid.RowDefinitions>
 
         <Label Text="{Binding Title}"
-                           Style="{StaticResource Header}"
+                           Style="{StaticResource primaryText}"
                            Grid.Row="0"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Center"
-                           HorizontalTextAlignment="Center"
-                           x:Name="title"
-                           Margin="40,20,40,0"/>
+                           x:Name="title"/>
 
         <lottie:AnimationView Animation="{Binding Animation}"
                               AutoPlay="False"
@@ -29,14 +25,10 @@
 
 
         <Label Text="{Binding Description}"
-                Style="{StaticResource Body}"
+                Style="{StaticResource secondaryText}"
                 Grid.Row="2"
-                VerticalOptions="Start"
-                HorizontalOptions="Center"
-                HorizontalTextAlignment="Center"
                 LineHeight="1.5"
-                x:Name="description"
-                Margin="40,20,40,0"/>
+                x:Name="description"/>
 
     </Grid>
 </ContentView>

@@ -1,7 +1,12 @@
 ﻿
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using Lottie.Forms;
 using wahid.cc.Models;
+using wahid.cc.Themes;
+using wahid.cc.ViewModels;
 using Xamanimation;
 using Xamarin.Forms;
 
@@ -12,10 +17,56 @@ namespace wahid.cc.Views
         double distanceFromCenter;
         double percentFromCenter;
         const double LabelOffset = 200;
+        int CardIndex = 0;
 
         public AnimatedStoryboard()
         {
             InitializeComponent();
+        }
+
+        private void LoadStoryboards()
+        {
+            #region Initialize Storyboard Elements
+
+            //(BindingContext as AnimatedStoryboardViewModel).Storyboards.Clear();
+
+            (BindingContext as AnimatedStoryboardViewModel).Storyboards.Clear();
+
+            (BindingContext as AnimatedStoryboardViewModel).Storyboards.Add(
+                new Storyboard()
+            {
+                Title = "Analytics".ToLower(),
+                Description = "Keep track of every cent you earn/spend. Jolt down how much money people owe you!".ToLower(),
+                Animation = "analytics.json",
+                To = (string)Application.Current.Resources["Page1To"],
+                From = (string)Application.Current.Resources["Page1From"]
+
+            });
+
+
+            (BindingContext as AnimatedStoryboardViewModel).Storyboards.Add(
+                new Storyboard()
+            {
+                Title = "Income Calculator".ToLower(),
+                Description = "Calculate and predict your income beforehand. Organize your income sources and track them easily.".ToLower(),
+                Animation = "rise.json",
+                To = (string)Application.Current.Resources["Page2To"],
+                From = (string)Application.Current.Resources["Page2From"]
+            });
+
+            (BindingContext as AnimatedStoryboardViewModel).Storyboards.Add
+                (
+                new Storyboard()
+                {
+                    Title = "AI assistant".ToLower(),
+                    Description = "AI assisted data analizer will predict your expenditure learning from your pruchase behaviors.".ToLower(),
+                    Animation = "money.json",
+                    To = (string)Application.Current.Resources["Page2To"],
+                    From = (string)Application.Current.Resources["Page2From"]
+                }
+                );
+               
+            #endregion
         }
 
         protected override void OnAppearing()
@@ -24,6 +75,7 @@ namespace wahid.cc.Views
 
             maincarousel.UserInteracted += Maincarousel_UserInteracted;
             maincarousel.ItemAppeared += Maincarousel_ItemAppeared;
+            LoadStoryboards();
         }
 
         protected override void OnDisappearing()
@@ -46,14 +98,49 @@ namespace wahid.cc.Views
         }
 
 
+        void OnModeChangerTapped(object sender, EventArgs args)
+        {
 
+            if (!Application.Current.Properties.ContainsKey("theme"))
+            {
+                Application.Current.Properties.Add("theme", Theme.Day);
+            }
+
+            ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
+            var theme = (Theme)Application.Current.Properties["theme"];
+
+
+            if (mergedDictionaries != null)
+            {
+                mergedDictionaries.Clear();
+
+                switch (theme)
+                {
+                    case Theme.Night:
+                        // Theme is Night so change it to Day
+                        modeSwitcher.PlayProgressSegment(1.0f, 0.0f);
+                        mergedDictionaries.Add(new LightTheme());
+                        Application.Current.Properties["theme"] = Theme.Day; break;
+
+
+                    default:
+                        // Change back to Night
+                        modeSwitcher.PlayProgressSegment(0.0f, 1.0f);
+                        mergedDictionaries.Add(new DarkTheme());
+                        Application.Current.Properties["theme"] = Theme.Night; break;
+                }
+            }
+
+            maincarousel.CurrentView.Animate(new ColorAnimation() { ToColor = Color.FromHex(Application.Current.Resources["Page" + (CardIndex + 1) + "From"].ToString()), Delay = 100 });
+        }
 
         private void Maincarousel_ItemAppeared(PanCardView.CardsView view, PanCardView.EventArgs.ItemAppearedEventArgs args)
         {
             var card = view.CurrentView as StoryCard;
             var item = args.Item as Storyboard;
+            CardIndex = args.Index;
 
-            card.Animate(new ColorAnimation() { ToColor = Color.FromHex(item.To), Delay = 100});
+            card.Animate(new ColorAnimation() { ToColor = Color.FromHex(Application.Current.Resources["Page" + (CardIndex + 1) + "To"].ToString()), Delay = 100});
 
         }
 
@@ -83,8 +170,6 @@ namespace wahid.cc.Views
                 ResetAnimations(card, nextCard);
             }
 
-
-            Console.WriteLine(args.Diff);
         }
 
         private void ResetAnimations(StoryCard card, StoryCard nextCard)
