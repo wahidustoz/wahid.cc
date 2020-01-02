@@ -55,7 +55,6 @@
         </StackLayout>
 
 
-
         <Frame HeightRequest="50"
                WidthRequest="50"
                CornerRadius="25"

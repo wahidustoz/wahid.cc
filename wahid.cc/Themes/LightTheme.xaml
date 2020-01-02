@@ -14,10 +14,10 @@
 
     <!--#region Storyboard BackgroundColor-->
     <x:String x:Key="Page1From">#F6FCFF</x:String>
-    <x:String x:Key="Page1To">#F6FCFF</x:String>
-    <x:String x:Key="Page2From">#F6FCFF</x:String>
-    <x:String x:Key="Page2To">#F7F4F3</x:String>
-    <x:String x:Key="Page3From">#F7F4F3</x:String>
-    <x:String x:Key="Page3To">#DDFDFE</x:String>
+    <x:String x:Key="Page1To">#F4FAFF</x:String>
+    <x:String x:Key="Page2From">#F4FAFF</x:String>
+    <x:String x:Key="Page2To">#EDF1F1</x:String>
+    <x:String x:Key="Page3From">#EDF1F1</x:String>
+    <x:String x:Key="Page3To">#FFCFF3</x:String>
     <!--#endregion-->
 </ResourceDictionary>
