@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using wahid.cc.Models;
 using wahid.cc.Themes;
 using wahid.cc.Views;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -18,12 +19,12 @@ namespace wahid.cc
             XF.Material.Forms.Material.Init(this);
 
             MainPage = SelectMainPage();
+
         }
 
         private Page SelectMainPage()
         {
-            if (Application.Current.Properties.ContainsKey("skip") &&
-                (bool)Application.Current.Properties["skip"] == true)
+            if (Preferences.ContainsKey("skip") && Preferences.Get("skip", false))
                 return new ContentPage();
 
             return new NavigationPage(new AnimatedStoryboard());
@@ -34,29 +35,22 @@ namespace wahid.cc
             // Handle when your app starts
 
             LoadTheme();
-
         }
 
         private void LoadTheme()
         {
-            if (!Application.Current.Properties.ContainsKey("theme"))
-                Application.Current.Properties.Add("theme", Theme.Day);
-
             ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
-            var theme = (Theme)Application.Current.Properties["theme"];
-
+            var theme = Preferences.Get("theme", Theme.Day.ToString());
+            Console.WriteLine(theme);
 
             if (mergedDictionaries != null)
             {
                 mergedDictionaries.Clear();
 
-                switch (theme)
-                {
-                    case Theme.Night: mergedDictionaries.Add(new DarkTheme()); break;
-                    default:
-                        mergedDictionaries.Add(new LightTheme());
-                        break;
-                }
+                if(theme == Theme.Day.ToString())
+                    mergedDictionaries.Add(new LightTheme());
+                else
+                    mergedDictionaries.Add(new DarkTheme());
             }
         }
 

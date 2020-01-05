@@ -9,7 +9,7 @@
     <Color x:Key="SecondaryTextColor">#1092AA</Color>
     <Color x:Key="TertiaryTextColor">#26C4E0</Color>
     <Color x:Key="TransparentColor">#D8D8D8</Color>
-
+    
 
 
     <!--#region Storyboard BackgroundColor-->

@@ -3,11 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Lottie.Forms;
 using wahid.cc.Models;
 using wahid.cc.Themes;
 using wahid.cc.ViewModels;
 using Xamanimation;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace wahid.cc.Views
@@ -73,9 +75,11 @@ namespace wahid.cc.Views
         {
             base.OnAppearing();
 
+            modeSwitcher.Progress = Preferences.Get("theme", Theme.Day.ToString()) == Theme.Day.ToString() ? 0.0f : 1.0f;
+
+            LoadStoryboards();
             maincarousel.UserInteracted += Maincarousel_UserInteracted;
             maincarousel.ItemAppeared += Maincarousel_ItemAppeared;
-            LoadStoryboards();
         }
 
         protected override void OnDisappearing()
@@ -88,50 +92,38 @@ namespace wahid.cc.Views
 
         async void OnTapGestureRecognizerTapped(object sender, EventArgs args)
         {
-            if (!Application.Current.Properties.ContainsKey("skip"))
-                Application.Current.Properties.Add("skip", false);
-
-            Application.Current.Properties["skip"] = dontremind.IsChecked;
-            await Application.Current.SavePropertiesAsync();
+            if (!Preferences.ContainsKey("skip"))
+                Preferences.Set("skip", dontremind.IsChecked);
 
             await Navigation.PushModalAsync(new ContentPage());
         }
 
 
-        void OnModeChangerTapped(object sender, EventArgs args)
+        async void OnModeChangerTapped(object sender, EventArgs args)
         {
-
-            if (!Application.Current.Properties.ContainsKey("theme"))
-            {
-                Application.Current.Properties.Add("theme", Theme.Day);
-            }
-
             ICollection<ResourceDictionary> mergedDictionaries = Application.Current.Resources.MergedDictionaries;
-            var theme = (Theme)Application.Current.Properties["theme"];
+            var theme = Preferences.Get("theme", Theme.Day.ToString());
 
 
             if (mergedDictionaries != null)
             {
                 mergedDictionaries.Clear();
 
-                switch (theme)
+                if(theme == Theme.Day.ToString())
                 {
-                    case Theme.Night:
-                        // Theme is Night so change it to Day
-                        modeSwitcher.PlayProgressSegment(1.0f, 0.0f);
-                        mergedDictionaries.Add(new LightTheme());
-                        Application.Current.Properties["theme"] = Theme.Day; break;
-
-
-                    default:
-                        // Change back to Night
-                        modeSwitcher.PlayProgressSegment(0.0f, 1.0f);
-                        mergedDictionaries.Add(new DarkTheme());
-                        Application.Current.Properties["theme"] = Theme.Night; break;
+                    modeSwitcher.PlayProgressSegment(0.0f, 1.0f);
+                    mergedDictionaries.Add(new DarkTheme());
+                    Preferences.Set("theme", Theme.Night.ToString());
+                }
+                else
+                {
+                    modeSwitcher.PlayProgressSegment(1.0f, 0.0f);
+                    mergedDictionaries.Add(new LightTheme());
+                    Preferences.Set("theme", Theme.Day.ToString());
                 }
             }
 
-            maincarousel.CurrentView.Animate(new ColorAnimation() { ToColor = Color.FromHex(Application.Current.Resources["Page" + (CardIndex + 1) + "From"].ToString()), Delay = 100 });
+            await maincarousel.CurrentView.Animate(new ColorAnimation() { ToColor = Color.FromHex(Application.Current.Resources["Page" + (CardIndex + 1) + "From"].ToString()), Delay = 100 });
         }
 
         private void Maincarousel_ItemAppeared(PanCardView.CardsView view, PanCardView.EventArgs.ItemAppearedEventArgs args)
